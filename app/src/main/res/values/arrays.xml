@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="medecins_array">
+        <item>Sélectionner un médecin</item>
+        <item>Dr. Amadou Diallo - Médecine Générale</item>
+        <item>Dr. Aissatou Sow - Cardiologie</item>
+        <item>Dr. Moussa Kane - Dermatologie</item>
+        <item>Dr. Fatima Diop - Pédiatrie</item>
+    </string-array>
+</resources>

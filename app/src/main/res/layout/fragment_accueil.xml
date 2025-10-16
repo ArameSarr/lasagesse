@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/purple_dark"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:text="🏥 Clinique La Sagesse"
+            android:textSize="28sp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="Excellence Médicale &amp; Innovation"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="24dp"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_patient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Espace Patient"
+            android:backgroundTint="@color/green_dark"
+            android:textColor="@android:color/white"
+            android:drawableStart="@drawable/ic_patient"
+            android:drawablePadding="8dp"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btn_medecin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Espace Médecin"
+            android:backgroundTint="@color/blue_dark"
+            android:textColor="@android:color/white"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btn_secretaire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Secrétaire"
+            android:backgroundTint="@color/white"
+            android:textColor="@android:color/holo_blue_dark"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btn_informations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Informations"
+            android:backgroundTint="@color/orange_dark"
+            android:textColor="@android:color/white"
+            android:padding="16dp" />
+
+    </LinearLayout>
+</ScrollView>

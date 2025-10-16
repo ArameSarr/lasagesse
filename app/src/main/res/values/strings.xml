@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Clinique La Sagesse</string>
+    <string name="logo_desc">Logo Clinique La Sagesse</string>
+    <string name="patient_icon">Icône Patient</string>
+    <string name="doctor_icon">Icône Médecin</string>
+    <string name="secretary_icon">Icône Secrétaire</string>
+    <string name="info_icon">Icône Informations</string>
+    <string name="patient_icon_desc">patient_icon_desc\n</string>
+</resources>

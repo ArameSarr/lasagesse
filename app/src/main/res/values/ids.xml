@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="card_prendre_rdv" type="id"></item>
+    <item name="card_mes_rdv" type="id"></item>
+    <item name="card_dossier" type="id"></item>
+    <item name="card_profil" type="id"></item>
+    <item name="fragment_container" type="id"></item>
+    <item name="btn_patient" type="id"></item>
+    <item name="btn_medecin" type="id"></item>
+    <item name="btn_secretaire" type="id"></item>
+    <item name="btn_informations" type="id"></item>
+</resources>
