@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Date (JJ/MM/AAAA)"
+            android:textColor="@color/blue_dark"
             android:inputType="date"
             android:layout_marginBottom="16dp" />
         <EditText

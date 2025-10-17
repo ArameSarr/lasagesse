@@ -53,6 +53,7 @@
                 android:weightSum="3"
                 android:layout_marginBottom="24dp">
 
+                <!-- Carte RDV -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="100dp"
@@ -88,6 +89,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
+                <!-- Carte À confirmer -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="100dp"
@@ -124,6 +126,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
+                <!-- Carte Prochain -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="100dp"
@@ -157,7 +160,7 @@
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <!-- Actions rapides -->
+            <!-- Titre Actions rapides -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -167,6 +170,7 @@
                 android:textColor="@color/text_primary"
                 android:layout_marginBottom="12dp" />
 
+            <!-- Première ligne d'actions -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,329 +178,189 @@
                 android:weightSum="2"
                 android:layout_marginBottom="16dp">
 
+                <!-- Carte Prendre RDV -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_prendre_rdv"
                     android:layout_width="0dp"
                     android:layout_height="140dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
-                    app:cardCornerRadius="20dp<?xml version="1.0" encoding="utf-8"?>
-                <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white">
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@color/primary_teal"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical"
+                        android:gravity="center"
                         android:padding="16dp">
 
                         <TextView
-                            android:id="@+id/tv_welcome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Bonjour Fatou!"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginBottom="16dp" />
+                            android:text="📅"
+                            android:textSize="40sp"
+                            android:layout_marginBottom="12dp" />
 
-                        <!-- Statistiques -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3"
-                            android:layout_marginBottom="24dp">
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:layout_width="0dp"
-                                android:layout_height="100dp"
-                                android:layout_weight="1"
-                                android:layout_marginEnd="8dp"
-                                app:cardCornerRadius="16dp"
-                                app:cardElevation="4dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:padding="8dp">
-
-                                    <TextView
-                                        android:id="@+id/tv_rdv_count"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="3"
-                                        android:textSize="28sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/green_dark" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Rendez-vous"
-                                        android:textSize="12sp"
-                                        android:textColor="@color/text_secondary" />
-                                </LinearLayout>
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:layout_width="0dp"
-                                android:layout_height="100dp"
-                                android:layout_weight="1"
-                                android:layout_marginEnd="8dp"
-                                app:cardCornerRadius="16dp"
-                                app:cardElevation="4dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:padding="8dp">
-
-                                    <TextView
-                                        android:id="@+id/tv_confirm_count"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="1"
-                                        android:textSize="28sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/green_dark" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="À confirmer"
-                                        android:textSize="12sp"
-                                        android:textColor="@color/text_secondary" />
-                                </LinearLayout>
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:layout_width="0dp"
-                                android:layout_height="100dp"
-                                android:layout_weight="1"
-                                app:cardCornerRadius="16dp"
-                                app:cardElevation="4dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:padding="8dp">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="📅"
-                                        android:textSize="28sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Prochain"
-                                        android:textSize="12sp"
-                                        android:textColor="@color/text_secondary" />
-                                </LinearLayout>
-                            </com.google.android.material.card.MaterialCardView>
-                        </LinearLayout>
-
-                        <!-- Actions rapides -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Actions rapides"
-                            android:textSize="18sp"
+                            android:text="Prendre RDV"
+                            android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginBottom="12dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2"
-                            android:layout_marginBottom="16dp">
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/card_prendre_rdv"
-                                android:layout_width="0dp"
-                                android:layout_height="120dp"
-                                android:layout_weight="1"
-                                android:layout_marginEnd="8dp"
-                                app:cardCornerRadius="16dp"
-                                app:cardElevation="4dp"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:foreground="?android:attr/selectableItemBackground">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:padding="16dp">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="📅"
-                                        android:textSize="32sp"
-                                        android:layout_marginBottom="8dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Prendre RDV"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/green_dark"
-                                        android:textAlignment="center" />
-                                </LinearLayout>
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/card_mes_rdv"
-                                android:layout_width="0dp"
-                                android:layout_height="120dp"
-                                android:layout_weight="1"
-                                android:layout_marginStart="8dp"
-                                app:cardCornerRadius="16dp"
-                                app:cardElevation="4dp"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:foreground="?android:attr/selectableItemBackground">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:padding="16dp">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="📋"
-                                        android:textSize="32sp"
-                                        android:layout_marginBottom="8dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Mes RDV"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/green_dark"
-                                        android:textAlignment="center" />
-                                </LinearLayout>
-                            </com.google.android.material.card.MaterialCardView>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2"
-                            android:layout_marginBottom="24dp">
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/card_dossier"
-                                android:layout_width="0dp"
-                                android:layout_height="120dp"
-                                android:layout_weight="1"
-                                android:layout_marginEnd="8dp"
-                                app:cardCornerRadius="16dp"
-                                app:cardElevation="4dp"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:foreground="?android:attr/selectableItemBackground">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:padding="16dp">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="🗂️"
-                                        android:textSize="32sp"
-                                        android:layout_marginBottom="8dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Mon Dossier"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/green_dark"
-                                        android:textAlignment="center" />
-                                </LinearLayout>
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/card_profil"
-                                android:layout_width="0dp"
-                                android:layout_height="120dp"
-                                android:layout_weight="1"
-                                android:layout_marginStart="8dp"
-                                app:cardCornerRadius="16dp"
-                                app:cardElevation="4dp"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:foreground="?android:attr/selectableItemBackground">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:gravity="center"
-                                    android:padding="16dp">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="👤"
-                                        android:textSize="32sp"
-                                        android:layout_marginBottom="8dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Mon Profil"
-                                        android:textSize="14sp"
-                                        android:textStyle="bold"
-                                        android:textColor="@color/green_dark"
-                                        android:textAlignment="center" />
-                                </LinearLayout>
-                            </com.google.android.material.card.MaterialCardView>
-                        </LinearLayout>
-
-                        <!-- Prochains rendez-vous -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Prochains rendez-vous"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginBottom="12dp" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_rendezvous"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false" />
-
+                            android:textColor="@color/text_white"
+                            android:textAlignment="center" />
                     </LinearLayout>
-                </ScrollView>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Carte Mes RDV -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_mes_rdv"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@color/secondary_mint"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="📋"
+                            android:textSize="40sp"
+                            android:layout_marginBottom="12dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mes RDV"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_white"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Deuxième ligne d'actions -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="24dp">
+
+                <!-- Carte Mon Dossier -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_dossier"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@color/accent_orange"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🗂️"
+                            android:textSize="40sp"
+                            android:layout_marginBottom="12dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mon Dossier"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_white"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Carte Mon Profil -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_profil"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@color/success_green"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="👤"
+                            android:textSize="40sp"
+                            android:layout_marginBottom="12dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mon Profil"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_white"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Titre Prochains rendez-vous -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prochains rendez-vous"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Liste des rendez-vous -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_rendezvous"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

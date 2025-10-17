@@ -1,73 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/purple_dark"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:padding="24dp">
 
+        <!-- Espace en haut -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <!-- Logo de la clinique -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="70dp"
+            app:cardElevation="12dp"
+            app:cardBackgroundColor="@color/white">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/clinique_logo"
+                android:contentDescription="@string/logo_desc"
+                android:padding="20dp"
+                android:scaleType="centerInside" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Titre -->
         <TextView
-            android:text="🏥 Clinique La Sagesse"
-            android:textSize="28sp"
+            android:text="Clinique La Sagesse"
+            android:textSize="32sp"
             android:textColor="@android:color/white"
             android:layout_marginBottom="8dp"
             android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <!-- Sous-titre -->
         <TextView
             android:text="Excellence Médicale &amp; Innovation"
             android:textColor="@android:color/white"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="48dp"
             android:textSize="16sp"
+            android:alpha="0.95"
+            android:fontFamily="sans-serif-light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <Button
+        <!-- Bouton Patient -->
+        <LinearLayout
             android:id="@+id/btn_patient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Espace Patient"
-            android:backgroundTint="@color/green_dark"
-            android:textColor="@android:color/white"
-            android:drawableStart="@drawable/ic_patient"
-            android:drawablePadding="8dp"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp" />
+            android:orientation="horizontal"
+            android:background="@drawable/bg_button_patient"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
 
-        <Button
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_patient"
+                android:contentDescription="@string/patient_icon"
+                app:tint="@android:color/white"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Espace Patient"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="→"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- Bouton Médecin -->
+        <LinearLayout
             android:id="@+id/btn_medecin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Espace Médecin"
-            android:backgroundTint="@color/blue_dark"
-            android:textColor="@android:color/white"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp" />
+            android:orientation="horizontal"
+            android:background="@drawable/bg_button_medecin"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
 
-        <Button
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_doctor"
+                android:contentDescription="@string/doctor_icon"
+                app:tint="@android:color/white"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Espace Médecin"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="→"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- Bouton Secrétaire -->
+        <LinearLayout
             android:id="@+id/btn_secretaire"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Secrétaire"
-            android:backgroundTint="@color/white"
-            android:textColor="@android:color/holo_blue_dark"
-            android:padding="16dp"
-            android:layout_marginBottom="16dp" />
+            android:orientation="horizontal"
+            android:background="@drawable/bg_button_secretaire"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
 
-        <Button
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_secretary"
+                android:contentDescription="@string/secretary_icon"
+                app:tint="@android:color/white"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Espace Secrétaire"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="→"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- Bouton Informations -->
+        <LinearLayout
             android:id="@+id/btn_informations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Informations"
-            android:backgroundTint="@color/orange_dark"
-            android:textColor="@android:color/white"
-            android:padding="16dp" />
+            android:orientation="horizontal"
+            android:background="@drawable/bg_button_info"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_info"
+                android:contentDescription="@string/info_icon"
+                app:tint="@android:color/white"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Informations"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="→"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <!-- Espace flexible en bas -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:minHeight="40dp" />
 
     </LinearLayout>
 </ScrollView>
