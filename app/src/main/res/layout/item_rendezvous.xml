@@ -1,77 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="12dp"
-    app:cardCornerRadius="15dp"
+    app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
-    android:padding="16dp">  <!-- Attention: le padding sur MaterialCardView peut parfois interférer avec le comportement attendu des enfants. Il est souvent préférable de mettre le padding sur le LinearLayout enfant direct. -->
+    app:cardBackgroundColor="@color/background_white"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <!-- android:padding="16dp"  Si tu déplaces le padding ici, retire-le de MaterialCardView -->
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <!-- En-tête avec date et heure -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"> <!-- gravity="center_vertical" est souvent plus approprié ici que "center" pour aligner les baselines ou les centres verticaux des TextViews-->
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
 
-            <TextView
-                android:id="@+id/tv_date"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="15/01/2024"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:textSize="15sp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15/01/2024"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_heure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14:30"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_heure"
+                android:id="@+id/tv_statut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="14:30"
-                android:textColor="@color/white"
+                android:text="Confirmé"
                 android:textSize="12sp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:background="@drawable/bg_status_confirme" />
+                android:textStyle="bold"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="@drawable/bg_status_confirme"
+                android:textColor="@color/status_confirme_text" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_medecin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dr. Amadou Diallo - Médecine Générale"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp" />
+        <!-- Séparateur -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/background_light"
+            android:layout_marginBottom="12dp" />
 
-        <TextView
-            android:id="@+id/tv_motif"
-            android:layout_width="wrap_content"
+        <!-- Informations médecin -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Consultation de routine"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp"
-            android:layout_marginTop="4dp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
 
-        <TextView
-            android:id="@+id/tv_statut"
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="👨‍⚕️"
+                android:textSize="20sp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_medecin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dr. Amadou Diallo"
+                android:textColor="@color/primary_teal"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Motif -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirmé"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            android:padding="12dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_status_confirme"
-            android:textColor="@color/status_confirme_text" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📝"
+                android:textSize="18sp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_motif"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Consultation de routine"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

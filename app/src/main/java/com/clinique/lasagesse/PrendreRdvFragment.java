@@ -1,4 +1,7 @@
 package com.clinique.lasagesse;
+
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +13,41 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class PrendreRdvFragment extends Fragment {
 
+    private static final String ARG_PATIENT_ID = "patient_id";
+
+    private int patientId;
     private Spinner spinnerMedecins;
     private EditText editDate, editHeure, editMotif, editNotes;
     private CheckBox checkUrgent;
     private Button btnConfirm;
     private DatabaseHelper dbHelper;
+    private Calendar calendar;
 
     public PrendreRdvFragment() {
         // Required empty public constructor
+    }
+
+    public static PrendreRdvFragment newInstance(int patientId) {
+        PrendreRdvFragment fragment = new PrendreRdvFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_PATIENT_ID, patientId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            patientId = getArguments().getInt(ARG_PATIENT_ID);
+        }
+        calendar = Calendar.getInstance();
     }
 
     @Override
@@ -28,6 +56,7 @@ public class PrendreRdvFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_prendre_rdv, container, false);
 
         dbHelper = new DatabaseHelper(requireContext());
+
         // Initialiser les vues
         spinnerMedecins = view.findViewById(R.id.spinner_medecins);
         editDate = view.findViewById(R.id.edit_date);
@@ -42,20 +71,53 @@ public class PrendreRdvFragment extends Fragment {
                 R.array.medecins_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMedecins.setAdapter(adapter);
-        // Pré-remplir les champs avec des données de test
-        editDate.setText("15/01/2024");
-        editHeure.setText("14:30");
-        editMotif.setText("Consultation de routine");
+
+        // Date picker
+        editDate.setOnClickListener(v -> showDatePicker());
+
+        // Time picker
+        editHeure.setOnClickListener(v -> showTimePicker());
 
         btnConfirm.setOnClickListener(v -> {
             if (validerFormulaire()) {
-                // Logique de confirmation du rendez-vous
-                Toast.makeText(requireContext(), "Rendez-vous confirmé !", Toast.LENGTH_SHORT).show();
-                requireActivity().onBackPressed();
+                enregistrerRendezVous();
             }
         });
 
         return view;
+    }
+
+    private void showDatePicker() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                requireContext(),
+                (view, year, month, dayOfMonth) -> {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+                    editDate.setText(sdf.format(calendar.getTime()));
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        datePickerDialog.show();
+    }
+
+    private void showTimePicker() {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(
+                requireContext(),
+                (view, hourOfDay, minute) -> {
+                    String heure = String.format(Locale.FRANCE, "%02d:%02d", hourOfDay, minute);
+                    editHeure.setText(heure);
+                },
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                true
+        );
+        timePickerDialog.show();
     }
 
     private boolean validerFormulaire() {
@@ -64,11 +126,11 @@ public class PrendreRdvFragment extends Fragment {
             return false;
         }
         if (editDate.getText().toString().trim().isEmpty()) {
-            Toast.makeText(requireContext(), "Veuillez saisir une date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Veuillez sélectionner une date", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (editHeure.getText().toString().trim().isEmpty()) {
-            Toast.makeText(requireContext(), "Veuillez saisir une heure", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Veuillez sélectionner une heure", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (editMotif.getText().toString().trim().isEmpty()) {
@@ -76,5 +138,11 @@ public class PrendreRdvFragment extends Fragment {
             return false;
         }
         return true;
+    }
+
+    private void enregistrerRendezVous() {
+        // Ici vous devriez ajouter une méthode dans DatabaseHelper pour insérer un RDV
+        Toast.makeText(requireContext(), "Rendez-vous confirmé !", Toast.LENGTH_LONG).show();
+        requireActivity().onBackPressed();
     }
 }

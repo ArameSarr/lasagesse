@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp"
     android:background="@android:color/white">
-    <LinearLayout
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mon Planning"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/blue_dark"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Semaine du 14-20 Janvier"
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary"
+        android:layout_marginBottom="16dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_planning"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="16dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_modifier_dispo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mon Planning"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@color/blue_dark"
-            android:layout_marginBottom="8dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Semaine du 14-20 Janvier"
-            android:textSize="14sp"
-            android:textColor="@color/text_secondary"
-            android:layout_marginBottom="16dp" />
-        <!-- Contenu du planning à implémenter -->
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Modifier mes disponibilités"
-            android:backgroundTint="@color/blue_dark"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
-</ScrollView>
+        android:text="Modifier mes disponibilités"
+        android:backgroundTint="@color/blue_dark"
+        android:textColor="@android:color/white" />
+</LinearLayout>

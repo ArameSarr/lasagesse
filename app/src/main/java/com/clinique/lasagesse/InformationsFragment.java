@@ -15,14 +15,6 @@ public class InformationsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Pour l'instant, vous pouvez créer une vue simple
-        // ou remplacez par votre layout si vous l'avez
-        return inflater.inflate(android.R.layout.simple_list_item_1, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // Initialiser vos composants ici
+        return inflater.inflate(R.layout.fragment_informations, container, false);
     }
 }

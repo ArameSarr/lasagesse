@@ -4,10 +4,12 @@
     android:layout_height="match_parent"
     android:padding="24dp"
     android:background="@android:color/white">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -16,6 +18,7 @@
             android:textStyle="bold"
             android:textColor="@color/green_dark"
             android:layout_marginBottom="24dp" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,8 +27,10 @@
                 android:id="@+id/edit_nom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nom" />
+                android:hint="Nom"
+                android:inputType="textPersonName|textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,8 +39,22 @@
                 android:id="@+id/edit_prenom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Prénom" />
+                android:hint="Prénom"
+                android:inputType="textPersonName|textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,9 +63,10 @@
                 android:id="@+id/edit_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Mot de passe" />
+                android:hint="Mot de passe (min. 6 caractères)"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,9 +75,10 @@
                 android:id="@+id/edit_telephone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:hint="Téléphone" />
+                android:hint="Téléphone (ex: 771234567)"
+                android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,8 +87,10 @@
                 android:id="@+id/edit_date_naissance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Date de naissance (JJ/MM/AAAA)" />
+                android:hint="Date de naissance (JJ/MM/AAAA)"
+                android:inputType="date" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,14 +99,18 @@
                 android:id="@+id/edit_adresse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Adresse" />
+                android:hint="Adresse complète"
+                android:inputType="textPostalAddress|textCapSentences" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="S'inscrire"
             android:backgroundTint="@color/green_dark"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
     </LinearLayout>
 </ScrollView>

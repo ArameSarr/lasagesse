@@ -1,5 +1,5 @@
 package com.clinique.lasagesse;
-import android.annotation.SuppressLint;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 import java.util.List;
+
 public class PatientDashboardFragment extends Fragment {
 
+    private static final String ARG_PATIENT_ID = "patient_id";
+    private static final String ARG_PATIENT_NAME = "patient_name";
+
+    private int patientId;
+    private String patientName;
     private TextView tvWelcome, tvRdvCount, tvConfirmCount;
     private RecyclerView rvRendezVous;
     private DatabaseHelper dbHelper;
@@ -19,6 +25,25 @@ public class PatientDashboardFragment extends Fragment {
     public PatientDashboardFragment() {
         // Required empty public constructor
     }
+
+    public static PatientDashboardFragment newInstance(int patientId, String patientName) {
+        PatientDashboardFragment fragment = new PatientDashboardFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_PATIENT_ID, patientId);
+        args.putString(ARG_PATIENT_NAME, patientName);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            patientId = getArguments().getInt(ARG_PATIENT_ID);
+            patientName = getArguments().getString(ARG_PATIENT_NAME);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,17 +58,23 @@ public class PatientDashboardFragment extends Fragment {
         rvRendezVous = view.findViewById(R.id.rv_rendezvous);
 
         // Configurer les cartes d'action
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) MaterialCardView cardPrendreRdv = view.findViewById(R.id.card_prendre_rdv);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) MaterialCardView cardMesRdv = view.findViewById(R.id.card_mes_rdv);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) MaterialCardView cardDossier = view.findViewById(R.id.card_dossier);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) MaterialCardView cardProfil = view.findViewById(R.id.card_profil);
+        MaterialCardView cardPrendreRdv = view.findViewById(R.id.card_prendre_rdv);
+        MaterialCardView cardMesRdv = view.findViewById(R.id.card_mes_rdv);
+        MaterialCardView cardDossier = view.findViewById(R.id.card_dossier);
+        MaterialCardView cardProfil = view.findViewById(R.id.card_profil);
+
         cardPrendreRdv.setOnClickListener(v -> {
-            PrendreRdvFragment fragment = new PrendreRdvFragment();
+            PrendreRdvFragment fragment = PrendreRdvFragment.newInstance(patientId);
             ((MainActivity) requireActivity()).loadFragment(fragment, true);
         });
 
         cardMesRdv.setOnClickListener(v -> {
-            MesRdvFragment fragment = new MesRdvFragment();
+            MesRdvFragment fragment = MesRdvFragment.newInstance(patientId);
+            ((MainActivity) requireActivity()).loadFragment(fragment, true);
+        });
+
+        cardProfil.setOnClickListener(v -> {
+            ProfilPatientFragment fragment = ProfilPatientFragment.newInstance(patientId);
             ((MainActivity) requireActivity()).loadFragment(fragment, true);
         });
 
@@ -52,16 +83,27 @@ public class PatientDashboardFragment extends Fragment {
 
         return view;
     }
+
     private void chargerDonnees() {
-        // Simuler les données de l'utilisateur
-        tvWelcome.setText("Bonjour Fatou!");
+        // Afficher le nom du patient
+        tvWelcome.setText("Bonjour " + patientName + "!");
 
-        // Statistiques (simulées pour l'exemple)
-        tvRdvCount.setText("3");
-        tvConfirmCount.setText("1");
+        // Charger les rendez-vous du patient
+        List<RendezVous> rdvList = dbHelper.getRendezVousPatient(patientId);
 
-        // Charger les rendez-vous
-        List<RendezVous> rdvList = dbHelper.getRendezVousPatient(1); // ID 1 pour le patient de test
+        // Calculer les statistiques
+        int totalRdv = rdvList.size();
+        int rdvAConfirmer = 0;
+        for (RendezVous rdv : rdvList) {
+            if ("À confirmer".equalsIgnoreCase(rdv.getStatut())) {
+                rdvAConfirmer++;
+            }
+        }
+
+        tvRdvCount.setText(String.valueOf(totalRdv));
+        tvConfirmCount.setText(String.valueOf(rdvAConfirmer));
+
+        // Configurer le RecyclerView
         RendezVousAdapter adapter = new RendezVousAdapter(rdvList);
         rvRendezVous.setLayoutManager(new LinearLayoutManager(requireContext()));
         rvRendezVous.setAdapter(adapter);

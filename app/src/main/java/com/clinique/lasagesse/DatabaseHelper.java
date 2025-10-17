@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class    DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "clinique_db";
     private static final int DATABASE_VERSION = 1;
@@ -43,6 +43,108 @@ private  static final String KEY_DATE_NAISSANCE ="date_naissance";
     private static final String KEY_URGENT = "urgent";
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+    // Ajouter ces méthodes à la fin de votre classe DatabaseHelper.java
+
+    // Ajouter un rendez-vous
+    public boolean ajouterRendezVous(int patientId, int medecinId, String date,
+                                     String heure, String motif, String notes,
+                                     String statut, boolean urgent) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_PATIENT_ID, patientId);
+        values.put(KEY_MEDECIN_ID, medecinId);
+        values.put(KEY_DATE_RDV, date);
+        values.put(KEY_HEURE, heure);
+        values.put(KEY_MOTIF, motif);
+        values.put(KEY_NOTES, notes);
+        values.put(KEY_STATUT, statut);
+        values.put(KEY_URGENT, urgent ? 1 : 0);
+
+        long result = db.insert(TABLE_RENDEZVOUS, null, values);
+        return result != -1;
+    }
+
+    // Mettre à jour le statut d'un rendez-vous
+    public boolean mettreAJourStatutRdv(int rdvId, String nouveauStatut) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_STATUT, nouveauStatut);
+
+        int rows = db.update(TABLE_RENDEZVOUS, values, KEY_ID + "=?",
+                new String[]{String.valueOf(rdvId)});
+        return rows > 0;
+    }
+
+    // Annuler un rendez-vous
+    public boolean annulerRendezVous(int rdvId) {
+        return mettreAJourStatutRdv(rdvId, "Annulé");
+    }
+
+    // Confirmer un rendez-vous
+    public boolean confirmerRendezVous(int rdvId) {
+        return mettreAJourStatutRdv(rdvId, "Confirmé");
+    }
+
+    // Obtenir un rendez-vous par ID
+    public RendezVous getRendezVousById(int rdvId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT r.*, p." + KEY_NOM + " as patient_nom, p." + KEY_PRENOM + " as patient_prenom, " +
+                "m." + KEY_NOM + " as medecin_nom, m." + KEY_PRENOM + " as medecin_prenom, " +
+                "m." + KEY_SPECIALITE + " as specialite " +
+                "FROM " + TABLE_RENDEZVOUS + " r " +
+                "INNER JOIN " + TABLE_PATIENTS + " p ON r." + KEY_PATIENT_ID + " = p." + KEY_ID + " " +
+                "INNER JOIN " + TABLE_MEDECINS + " m ON r." + KEY_MEDECIN_ID + " = m." + KEY_ID + " " +
+                "WHERE r." + KEY_ID + " = ?";
+
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(rdvId)});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            RendezVous rdv = new RendezVous();
+            rdv.setId(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ID)));
+            rdv.setPatientId(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_PATIENT_ID)));
+            rdv.setMedecinId(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_MEDECIN_ID)));
+            rdv.setDate(cursor.getString(cursor.getColumnIndexOrThrow(KEY_DATE_RDV)));
+            rdv.setHeure(cursor.getString(cursor.getColumnIndexOrThrow(KEY_HEURE)));
+            rdv.setMotif(cursor.getString(cursor.getColumnIndexOrThrow(KEY_MOTIF)));
+            rdv.setNotes(cursor.getString(cursor.getColumnIndexOrThrow(KEY_NOTES)));
+            rdv.setStatut(cursor.getString(cursor.getColumnIndexOrThrow(KEY_STATUT)));
+            rdv.setUrgent(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_URGENT)) == 1);
+
+            String medecinNom = cursor.getString(cursor.getColumnIndexOrThrow("medecin_nom")) + " " +
+                    cursor.getString(cursor.getColumnIndexOrThrow("medecin_prenom"));
+            rdv.setMedecinNom(medecinNom);
+            rdv.setSpecialite(cursor.getString(cursor.getColumnIndexOrThrow("specialite")));
+
+            cursor.close();
+            return rdv;
+        }
+        return null;
+    }
+
+    // Obtenir la liste de tous les médecins
+    public List<Medecin> getAllMedecins() {
+        List<Medecin> medecinList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_MEDECINS, null, null, null, null, null, KEY_NOM);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Medecin medecin = new Medecin();
+                medecin.setId(cursor.getInt(cursor.getColumnIndexOrThrow(KEY_ID)));
+                medecin.setNom(cursor.getString(cursor.getColumnIndexOrThrow(KEY_NOM)));
+                medecin.setPrenom(cursor.getString(cursor.getColumnIndexOrThrow(KEY_PRENOM)));
+                medecin.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(KEY_EMAIL)));
+                medecin.setSpecialite(cursor.getString(cursor.getColumnIndexOrThrow(KEY_SPECIALITE)));
+                medecin.setCabinet(cursor.getString(cursor.getColumnIndexOrThrow(KEY_CABINET)));
+                medecinList.add(medecin);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return medecinList;
     }
 
     @Override
