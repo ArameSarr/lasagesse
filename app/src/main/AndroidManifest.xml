@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Permissions minimales probables pour une application clinique -->
+    <!-- Permissions pour les notifications -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <!-- Permissions optionnelles à décommenter si besoin -->
-    <!--
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
-    -->
+
+    <!-- Permissions pour SMS -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- Permission pour vibrations -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -26,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lasagesse">
 
-        <!-- Déclaration de l'activité principale -->
+        <!-- Activité principale -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -37,7 +36,15 @@
             </intent-filter>
         </activity>
 
-        <!-- Ne pas déclarer les fragments ici, ils sont gérés par l'activité -->
+        <!-- BroadcastReceiver pour les rappels de RDV -->
+        <receiver
+            android:name=".RdvReminderReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.clinique.lasagesse.RDV_REMINDER" />
+            </intent-filter>
+        </receiver>
 
     </application>
 
