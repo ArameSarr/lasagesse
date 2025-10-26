@@ -18,8 +18,7 @@
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="8dp"
-            app:cardBackgroundColor="@drawable/gradient_background">
-
+            app:cardBackgroundColor="@color/primary_teal">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

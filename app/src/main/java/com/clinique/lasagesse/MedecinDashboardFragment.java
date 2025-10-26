@@ -56,9 +56,33 @@ public class MedecinDashboardFragment extends Fragment {
         tvConsultationsCount = view.findViewById(R.id.tv_consultations_count);
         rvConsultations = view.findViewById(R.id.rv_consultations);
 
+        // ✅ CORRECTION : Ajouter les listeners pour toutes les cartes
         MaterialCardView cardPlanning = view.findViewById(R.id.card_planning);
+        MaterialCardView cardDisponibilites = view.findViewById(R.id.card_disponibilites);
+        MaterialCardView cardPatients = view.findViewById(R.id.card_patients);
+        MaterialCardView cardProfil = view.findViewById(R.id.card_profil);
+
         cardPlanning.setOnClickListener(v -> {
             PlanningMedecinFragment fragment = PlanningMedecinFragment.newInstance(medecinId);
+            ((MainActivity) requireActivity()).loadFragment(fragment, true);
+        });
+
+        // ✅ NOUVEAU : Bouton Disponibilités
+        cardDisponibilites.setOnClickListener(v -> {
+            DisponibilitesFragment fragment = DisponibilitesFragment.newInstance(medecinId);
+            ((MainActivity) requireActivity()).loadFragment(fragment, true);
+        });
+
+        // ✅ NOUVEAU : Bouton Patients (pour l'instant, affiche un message)
+        cardPatients.setOnClickListener(v -> {
+            android.widget.Toast.makeText(requireContext(),
+                    "Liste des patients - En développement",
+                    android.widget.Toast.LENGTH_SHORT).show();
+        });
+
+        // ✅ NOUVEAU : Bouton Profil
+        cardProfil.setOnClickListener(v -> {
+            ProfilMedecinFragment fragment = new ProfilMedecinFragment();
             ((MainActivity) requireActivity()).loadFragment(fragment, true);
         });
 

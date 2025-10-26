@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class PrendreRdvFragment extends Fragment {
@@ -28,10 +29,9 @@ public class PrendreRdvFragment extends Fragment {
     private Button btnConfirm;
     private DatabaseHelper dbHelper;
     private Calendar calendar;
+    private List<Medecin> medecinsList;
 
-    public PrendreRdvFragment() {
-        // Required empty public constructor
-    }
+    public PrendreRdvFragment() {}
 
     public static PrendreRdvFragment newInstance(int patientId) {
         PrendreRdvFragment fragment = new PrendreRdvFragment();
@@ -66,11 +66,8 @@ public class PrendreRdvFragment extends Fragment {
         checkUrgent = view.findViewById(R.id.check_urgent);
         btnConfirm = view.findViewById(R.id.btn_confirm);
 
-        // Configurer le spinner des médecins
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
-                R.array.medecins_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerMedecins.setAdapter(adapter);
+        // ✅ CORRECTION : Charger les médecins depuis la base de données
+        chargerMedecins();
 
         // Date picker
         editDate.setOnClickListener(v -> showDatePicker());
@@ -85,6 +82,28 @@ public class PrendreRdvFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void chargerMedecins() {
+        // ✅ CORRECTION : Charger la liste des médecins depuis la DB
+        medecinsList = dbHelper.getAllMedecins();
+
+        String[] medecinsArray = new String[medecinsList.size() + 1];
+        medecinsArray[0] = "Sélectionner un médecin";
+
+        for (int i = 0; i < medecinsList.size(); i++) {
+            Medecin m = medecinsList.get(i);
+            medecinsArray[i + 1] = "Dr. " + m.getNom() + " " + m.getPrenom() +
+                    " (" + m.getSpecialite() + ")";
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                medecinsArray
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMedecins.setAdapter(adapter);
     }
 
     private void showDatePicker() {
@@ -141,8 +160,48 @@ public class PrendreRdvFragment extends Fragment {
     }
 
     private void enregistrerRendezVous() {
-        // Ici vous devriez ajouter une méthode dans DatabaseHelper pour insérer un RDV
-        Toast.makeText(requireContext(), "Rendez-vous confirmé !", Toast.LENGTH_LONG).show();
-        requireActivity().onBackPressed();
+        // ✅ CORRECTION : Enregistrer réellement le rendez-vous
+        int medecinPosition = spinnerMedecins.getSelectedItemPosition();
+        int medecinId = medecinsList.get(medecinPosition - 1).getId();
+
+        String date = editDate.getText().toString().trim();
+        String heure = editHeure.getText().toString().trim();
+        String motif = editMotif.getText().toString().trim();
+        String notes = editNotes.getText().toString().trim();
+        boolean urgent = checkUrgent.isChecked();
+        String statut = urgent ? "Urgent" : "À confirmer";
+
+        boolean success = dbHelper.ajouterRendezVous(
+                patientId,
+                medecinId,
+                date,
+                heure,
+                motif,
+                notes,
+                statut,
+                urgent
+        );
+
+        if (success) {
+            Toast.makeText(requireContext(),
+                    "✅ Rendez-vous confirmé !",
+                    Toast.LENGTH_LONG).show();
+
+            // ✅ NOUVEAU : Planifier un rappel 24h avant
+            RendezVous rdv = dbHelper.getRendezVousById(
+                    dbHelper.getAllRendezVous().get(0).getId()
+            );
+
+            if (rdv != null) {
+                NotificationHelper notificationHelper = new NotificationHelper(requireContext());
+                notificationHelper.planifierRappelRdv(rdv.getId(), date, heure, 24);
+            }
+
+            requireActivity().onBackPressed();
+        } else {
+            Toast.makeText(requireContext(),
+                    "❌ Erreur lors de la création du rendez-vous",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }
