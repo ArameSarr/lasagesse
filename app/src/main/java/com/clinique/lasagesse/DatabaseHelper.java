@@ -699,4 +699,32 @@ private  static final String KEY_DATE_NAISSANCE ="date_naissance";
         }
         return null;
     }
+    // Ajouter à la fin de la classe DatabaseHelper
+
+    // Mettre à jour un rendez-vous
+    public boolean modifierRendezVous(int rdvId, int medecinId, String date,
+                                      String heure, String motif, String notes, boolean urgent) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_MEDECIN_ID, medecinId);
+        values.put(KEY_DATE_RDV, date);
+        values.put(KEY_HEURE, heure);
+        values.put(KEY_MOTIF, motif);
+        values.put(KEY_NOTES, notes);
+        values.put(KEY_URGENT, urgent ? 1 : 0);
+        values.put(KEY_STATUT, urgent ? "Urgent" : "À confirmer");
+
+        int rows = db.update(TABLE_RENDEZVOUS, values, KEY_ID + "=?",
+                new String[]{String.valueOf(rdvId)});
+        return rows > 0;
+    }
+
+    // Supprimer un rendez-vous
+    public boolean supprimerRendezVous(int rdvId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete(TABLE_RENDEZVOUS, KEY_ID + "=?",
+                new String[]{String.valueOf(rdvId)});
+        return rows > 0;
+    }
 }

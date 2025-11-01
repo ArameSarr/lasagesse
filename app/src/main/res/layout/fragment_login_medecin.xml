@@ -68,5 +68,7 @@
             android:text="Se connecter"
             android:backgroundTint="@color/blue_dark"
             android:textColor="@android:color/white" />
+
+
     </LinearLayout>
 </ScrollView>

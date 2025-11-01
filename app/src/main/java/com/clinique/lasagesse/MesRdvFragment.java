@@ -19,9 +19,7 @@ public class MesRdvFragment extends Fragment {
     private TextView tvEmptyState;
     private DatabaseHelper dbHelper;
 
-    public MesRdvFragment() {
-        // Constructeur vide requis
-    }
+    public MesRdvFragment() {}
 
     public static MesRdvFragment newInstance(int patientId) {
         MesRdvFragment fragment = new MesRdvFragment();
@@ -54,6 +52,13 @@ public class MesRdvFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Recharger les données quand on revient sur ce fragment
+        chargerRendezVous();
+    }
+
     private void chargerRendezVous() {
         dbHelper = new DatabaseHelper(requireContext());
         List<RendezVous> rdvList = dbHelper.getRendezVousPatient(patientId);
@@ -66,7 +71,12 @@ public class MesRdvFragment extends Fragment {
             recyclerView.setVisibility(View.VISIBLE);
             tvEmptyState.setVisibility(View.GONE);
 
-            RendezVousAdapter adapter = new RendezVousAdapter(rdvList);
+            // Créer l'adapter avec le click listener
+            RendezVousAdapter adapter = new RendezVousAdapter(rdvList, rdv -> {
+                // Ouvrir le fragment de modification
+                ModifierRdvFragment fragment = ModifierRdvFragment.newInstance(rdv.getId(), patientId);
+                ((MainActivity) requireActivity()).loadFragment(fragment, true);
+            });
             recyclerView.setAdapter(adapter);
         }
     }
