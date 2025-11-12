@@ -26,6 +26,11 @@ public class AccueilFragment extends Fragment {
         LinearLayout btnPatient = view.findViewById(R.id.btn_patient);
         LinearLayout btnMedecin = view.findViewById(R.id.btn_medecin);
         LinearLayout btnSecretaire = view.findViewById(R.id.btn_secretaire);
+        LinearLayout btnAdmin = view.findViewById(R.id.btn_admin);
+
+        btnAdmin.setOnClickListener(v -> {
+            ((MainActivity) requireActivity()).loadFragment(new LoginAdminFragment(), true);
+        });
         View btnInformations = view.findViewById(R.id.btn_informations);
 
         btnPatient.setOnClickListener(v -> {
