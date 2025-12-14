@@ -158,6 +158,15 @@ private  static final String KEY_DATE_NAISSANCE ="date_naissance";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+          // Creation de la table admins
+        String CREATE_ADMINS_TABLE = "CREATE TABLE " + TABLE_ADMINS + "("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_NOM + " TEXT,"
+                + KEY_PRENOM + " TEXT,"
+                + KEY_EMAIL + " TEXT UNIQUE,"
+                + KEY_PASSWORD + " TEXT,"
+                + KEY_ROLE + " TEXT" + ")";
+        db.execSQL(CREATE_ADMINS_TABLE);
         // Création de la table patients
         String CREATE_PATIENTS_TABLE = "CREATE TABLE " + TABLE_PATIENTS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -203,16 +212,7 @@ private  static final String KEY_DATE_NAISSANCE ="date_naissance";
                 + "FOREIGN KEY(" + KEY_MEDECIN_ID + ") REFERENCES " + TABLE_MEDECINS + "(" + KEY_ID + ")" + ")";
         db.execSQL(CREATE_RENDEZVOUS_TABLE);
 
-        // Insertion de données de test
-        insererDonneesTest(db);
-        String CREATE_ADMINS_TABLE = "CREATE TABLE " + TABLE_ADMINS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_NOM + " TEXT,"
-                + KEY_PRENOM + " TEXT,"
-                + KEY_EMAIL + " TEXT UNIQUE,"
-                + KEY_PASSWORD + " TEXT,"
-                + KEY_ROLE + " TEXT" + ")";
-        db.execSQL(CREATE_ADMINS_TABLE);
+
 
     }
 

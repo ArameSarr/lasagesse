@@ -1,5 +1,5 @@
-<resources>
-    <!-- Thème de base -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Thème de base compatible API 21+ -->
     <style name="Base.Theme.Lasagesse" parent="Theme.Material3.Light.NoActionBar">
         <!-- Couleurs principales -->
         <item name="colorPrimary">@color/primary_teal</item>
@@ -23,13 +23,13 @@
         <item name="colorError">@color/error_red</item>
         <item name="colorOnError">@color/text_white</item>
 
-        <!-- Barre de statut -->
+        <!-- Barre de statut (compatible API 21+) -->
         <item name="android:statusBarColor">@color/primary_teal_dark</item>
-        <item name="android:windowLightStatusBar">false</item>
 
-        <!-- Navigation bar -->
+        <!-- Navigation bar (compatible API 21+) -->
         <item name="android:navigationBarColor">@color/background_white</item>
-        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- windowLightStatusBar et windowLightNavigationBar RETIRÉS (nécessitent API 23+) -->
     </style>
 
     <style name="Theme.Lasagesse" parent="Base.Theme.Lasagesse" />

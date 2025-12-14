@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    // Pas de version spécifiée ici
 }
 
 android {
