@@ -93,31 +93,37 @@ public class AdminDashboardFragment extends Fragment {
     }
 
     private void configurerListeners() {
+        // Gestion des Patients
         cardGestionPatients.setOnClickListener(v -> {
             GestionUtilisateursFragment fragment = GestionUtilisateursFragment.newInstance("patients");
             ((MainActivity) requireActivity()).loadFragment(fragment, true);
         });
 
+        // Gestion des Médecins
         cardGestionMedecins.setOnClickListener(v -> {
             GestionUtilisateursFragment fragment = GestionUtilisateursFragment.newInstance("medecins");
             ((MainActivity) requireActivity()).loadFragment(fragment, true);
         });
 
+        // Gestion des Secrétaires
         cardGestionSecretaires.setOnClickListener(v -> {
             GestionUtilisateursFragment fragment = GestionUtilisateursFragment.newInstance("secretaires");
             ((MainActivity) requireActivity()).loadFragment(fragment, true);
         });
 
+        // Historique Complet
         cardHistorique.setOnClickListener(v -> {
             HistoriqueCompletFragment fragment = new HistoriqueCompletFragment();
             ((MainActivity) requireActivity()).loadFragment(fragment, true);
         });
 
+        // ✅ Statistiques
         cardStatistiques.setOnClickListener(v -> {
             StatistiquesFragment fragment = new StatistiquesFragment();
             ((MainActivity) requireActivity()).loadFragment(fragment, true);
         });
 
+        // ✅ CORRECTION : Paramètres (était manquant ou mal configuré)
         cardParametres.setOnClickListener(v -> {
             ParametresFragment fragment = new ParametresFragment();
             ((MainActivity) requireActivity()).loadFragment(fragment, true);

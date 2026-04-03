@@ -176,7 +176,7 @@
                 android:textSize="24sp" />
         </LinearLayout>
 
-        <!-- ✅ NOUVEAU: Bouton Administrateur -->
+        <!-- Bouton Administrateur -->
         <LinearLayout
             android:id="@+id/btn_admin"
             android:layout_width="match_parent"

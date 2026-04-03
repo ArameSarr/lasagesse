@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +13,7 @@ import java.util.List;
 
 /**
  * Dashboard de la secrétaire médicale
- * Permet de gérer les RDV, les patients et voir les statistiques
+ * Permet de gérer les RDV et voir les statistiques
  */
 public class SecretaireDashboardFragment extends Fragment {
 
@@ -64,12 +63,10 @@ public class SecretaireDashboardFragment extends Fragment {
 
         // Récupérer les cartes d'action
         MaterialCardView cardGestionRdv = view.findViewById(R.id.card_gestion_rdv);
-        MaterialCardView cardNouveauRdv = view.findViewById(R.id.card_nouveau_rdv);
-        MaterialCardView cardPatients = view.findViewById(R.id.card_patients);
-        MaterialCardView cardStatistiques = view.findViewById(R.id.card_statistiques);
+        // ❌ SUPPRIMÉ : cardNouveauRdv, cardPatients, cardStatistiques
 
-        // ✅ Configuration des listeners
-        configurerListeners(cardGestionRdv, cardNouveauRdv, cardPatients, cardStatistiques);
+        // ✅ Configuration du seul listener actif : Gestion des RDV
+        configurerListeners(cardGestionRdv);
 
         // Charger les données
         chargerDonnees();
@@ -78,52 +75,18 @@ public class SecretaireDashboardFragment extends Fragment {
     }
 
     /**
-     * Configure tous les listeners des boutons
+     * Configure le listener du bouton Gestion des RDV uniquement
      */
-    private void configurerListeners(MaterialCardView cardGestionRdv,
-                                     MaterialCardView cardNouveauRdv,
-                                     MaterialCardView cardPatients,
-                                     MaterialCardView cardStatistiques) {
-
-        // ✅ Bouton Gestion des RDV
+    private void configurerListeners(MaterialCardView cardGestionRdv) {
+        // ✅ Bouton Gestion des RDV (SEUL ACTIF)
         cardGestionRdv.setOnClickListener(v -> {
             GestionRdvFragment fragment = new GestionRdvFragment();
             ((MainActivity) requireActivity()).loadFragment(fragment, true);
         });
 
-        // ✅ Bouton Nouveau RDV
-        cardNouveauRdv.setOnClickListener(v -> {
-            Toast.makeText(requireContext(),
-                    "📅 Création de RDV pour secrétaire - En développement",
-                    Toast.LENGTH_SHORT).show();
-
-            // TODO: Créer un fragment PrendreRdvSecretaireFragment qui permet
-            // à la secrétaire de créer un RDV pour un patient
-            // PrendreRdvSecretaireFragment fragment = new PrendreRdvSecretaireFragment();
-            // ((MainActivity) requireActivity()).loadFragment(fragment, true);
-        });
-
-        // ✅ Bouton Gestion des Patients
-        cardPatients.setOnClickListener(v -> {
-            Toast.makeText(requireContext(),
-                    "👥 Liste des patients - En développement",
-                    Toast.LENGTH_SHORT).show();
-
-            // TODO: Créer un fragment ListePatientsFragment
-            // ListePatientsFragment fragment = new ListePatientsFragment();
-            // ((MainActivity) requireActivity()).loadFragment(fragment, true);
-        });
-
-        // ✅ Bouton Statistiques
-        cardStatistiques.setOnClickListener(v -> {
-            Toast.makeText(requireContext(),
-                    "📊 Statistiques de la clinique - En développement",
-                    Toast.LENGTH_SHORT).show();
-
-            // TODO: Créer un fragment StatistiquesFragment
-            // StatistiquesFragment fragment = new StatistiquesFragment();
-            // ((MainActivity) requireActivity()).loadFragment(fragment, true);
-        });
+        // ❌ SUPPRIMÉ : Bouton Nouveau RDV
+        // ❌ SUPPRIMÉ : Bouton Gestion des Patients
+        // ❌ SUPPRIMÉ : Bouton Statistiques
     }
 
     /**
